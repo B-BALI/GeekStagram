@@ -11,15 +11,15 @@
   </head>
  
   <body>
-  <ul>
+<ul>
   <li><label>GEEKSTAGRAM</label></li>
   <li><a href="/">Home</a></li>
-  <ul style="float:right;list-style-type:none;">
-    <li><form action="/logout" method="post">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <button type="submit">Log out</button>
-            </form></li>
-  </ul>
+	<li style="float:right;">
+		<form action="/logout" method="post">
+		                <button class="logout"  type="submit">Log out</button>
+		</form>
+	</li>
+
 </ul>
  <div class="container">
  <h1 th:text="${user.pseudo}"></h1>

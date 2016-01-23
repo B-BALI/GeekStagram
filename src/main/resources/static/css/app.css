@@ -93,3 +93,16 @@ li button{
 li button:hover {
 	background-color: #111;
 }
+
+.logout  {
+	border:0; 
+	background:transparent; 
+	color:white;
+	text-decoration: underline; 
+}
+.logout:hover {
+	border:0; 
+	background:transparent; 
+	color:white;
+	text-decoration: underline; 
+}

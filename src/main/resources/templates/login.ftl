@@ -1,4 +1,3 @@
-<#-- @ftlvariable name="_csrf" type="org.springframework.security.web.csrf.CsrfToken" -->
 <#-- @ftlvariable name="error" type="java.util.Optional<String>" -->
 <!DOCTYPE html>
 <html lang="en">
@@ -12,12 +11,11 @@
 <div class="login">
 <h1>Log in</h1>
 	<form role="form" action="/login" method="post">
-    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input placeholder="E-mail" type="email" name="email" id="email" required autofocus/>
         <input type="password" name="password" placeholder="Password" id="password" required/>
     	<button class="btn btn-primary btn-block btn-large" type="submit">Sign in</button>
     	<span style="color:white; text-align:center">or</span>
-    	<button class="btn btn-success btn-block btn-large"><a href="/register">Register</a></button>
+    	<a class="alternativeLink" href="/register">Register</a>
     	
 	</form>
 </div>

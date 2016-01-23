@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: econocom-ort-student
 Implementation-Version: 0.1.0
-Built-By: Etienne
+Built-By: BURAK.B
 Implementation-Vendor-Id: org.springframework
-Build-Jdk: 1.8.0_65
+Build-Jdk: 1.8.0_25
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 
