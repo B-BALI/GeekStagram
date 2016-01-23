@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+ 
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+  <head>
+    <title>Spring MVC view layer: Thymeleaf vs. JSP</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/app.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+  </head>
+ 
+  <body>
+ <div class="container">
+ <h1 th:text="${user.pseudo}"></h1>
+    <div id="posts">
+	    <div class="panel panel-primary" th:each="post : ${user.posts}">
+		<div th:text ="${post.content}" class="panel-body"></div>
+		<div th:text ="${#dates.format(post.date,'dd/MM/YYYY h:m')}"  class="panel-footer panelDate"></div>
+	    </div>
+    </div>
+</div>
+<script type="text/javascript">
+</script>
+  </body>
+ 
+</html>

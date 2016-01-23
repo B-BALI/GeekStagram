@@ -1,24 +1,29 @@
 package ort.geekstagram_student.controllers;
 
-import java.util.ArrayList;
 
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import ort.geekstagram_student.Entities.PostEntity;
+import ort.geekstagram_student.domain.CurrentUser;
 import ort.geekstagram_student.services.IPostService;
-import ort.geekstagram_student.services.MysqlPostService;
 
 
 @CrossOrigin
-@RestController
+@Controller
 public class PostController {
 
 
@@ -35,10 +40,14 @@ public class PostController {
 		this.service = service;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/posts", produces="application/json")
-	public Iterable<PostEntity> getAll() {
-		ArrayList<PostEntity> list = service.getAll();
-		return list;
+	@RequestMapping(method = RequestMethod.GET, value = "/")
+	public String getAll(Model model) {
+		ArrayList<PostEntity> posts;
+		posts = service.getAll();
+		Collections.reverse(posts);
+		model.addAttribute("posts",(ArrayList<PostEntity>)posts);
+		model.addAttribute("post", new PostEntity());
+		return "home";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/posts/{id}", produces="application/json")
@@ -46,9 +55,14 @@ public class PostController {
 		return service.getById(id);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, consumes = "application/json", value = "/posts")
-	public void add(@RequestBody PostEntity post) {
+	@RequestMapping(method = RequestMethod.POST, value = "/posts")
+	public String add(CurrentUser currentUser,@ModelAttribute PostEntity post) {
+		post.setUser(currentUser.getUser());
+		Date now = new Date();
+		post.setDate(now.getTime());
 		service.add(post);
+		return "redirect:/";
+	
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "/posts/{id}")
