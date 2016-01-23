@@ -10,6 +10,9 @@ import org.springframework.validation.Validator;
 import ort.geekstagram_student.domain.UserCreateForm;
 import ort.geekstagram_student.services.user.UserService;
 
+/**
+ * Gestion de la validation du formulaire d'inscription
+ */
 @Component
 public class UserCreateFormValidator implements Validator {
 
@@ -25,6 +28,9 @@ public class UserCreateFormValidator implements Validator {
         return clazz.equals(UserCreateForm.class);
     }
 
+    /**
+     * Validation général du formulaire d'inscription
+     */
     @Override
     public void validate(Object target, Errors errors) {
         UserCreateForm form = (UserCreateForm) target;
@@ -34,18 +40,27 @@ public class UserCreateFormValidator implements Validator {
         validatePseudo(errors, form);
     }
 
+    /**
+     * Validation du password
+     */
     private void validatePasswords(Errors errors, UserCreateForm form) {
         if (!form.getPassword().equals(form.getPasswordRepeated())) {
             errors.reject("password.no_match", "Passwords do not match");
         }
     }
 
+    /**
+     * Validation du mail
+     */
     private void validateEmail(Errors errors, UserCreateForm form) {
         if (userService.getUserByEmail(form.getEmail()).isPresent()) {
             errors.reject("email.exists", "User with this email already exists");
         }
     }
     
+    /**
+     * Validation du pseudo
+     */
     private void validatePseudo(Errors errors, UserCreateForm form) {
         if (userService.getUserByPseudo(form.getPseudo()).isPresent()) {
             errors.reject("pseudo.exists", "User with this pseudo already exists");

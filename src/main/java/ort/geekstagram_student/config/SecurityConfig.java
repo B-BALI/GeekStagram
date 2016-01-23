@@ -17,11 +17,17 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+/**
+ * Configuration de spring security
+ */
 class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
 
+    /**
+     * Configuration des permission
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -53,6 +59,9 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
     
+    /**
+     * redirect sur la home page apres authentification
+     */
     @Bean
     public AuthenticationSuccessHandler successHandler() {
         SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler();
