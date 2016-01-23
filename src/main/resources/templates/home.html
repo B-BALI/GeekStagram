@@ -11,6 +11,16 @@
   </head>
  
   <body>
+<ul>
+  <li><label>GEEKSTAGRAM</label></li>
+  <li><a href="/">Home</a></li>
+  <ul style="float:right;list-style-type:none;">
+    <li><form action="/logout" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <button type="submit">Log out</button>
+            </form></li>
+  </ul>
+</ul>
 
  <div class="container">
  <div class="col-md-3 col-ofsset-9">
